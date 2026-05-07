@@ -1,0 +1,21 @@
+name: Web Conf App line 
+
+on: 
+  push: 
+    branches: 
+      - main 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checking out code 
+        uses: actions/checkout@v4
+
+      - name: Build image for Backend 
+        run: docker build -t backend ./backend 
+
+      - name: Build frontend image 
+        run: docker build frontend ./frontend 
+
+      - name: Docker Compose 
+        run: docker compose config 
